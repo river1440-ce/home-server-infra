@@ -1,9 +1,5 @@
 version: '3'
 
-secrets:
-  cf_tunnel_token:
-    file: "./secrets/cf_tunnel_token.secret"
-
 services:
   reverse-proxy:
     # The official v3 Traefik docker image
