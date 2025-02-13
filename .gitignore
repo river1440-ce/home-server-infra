@@ -1,5 +1,21 @@
-# Ignore environment variables file
-*.env
-
 # Ignore log files
 *.log
+
+# Environment variables
+.env
+*.env
+
+# SSL/TLS Certificates
+acme.json
+certs/
+*.crt
+*.key
+*.pem
+
+# Cloudflare Tunnel credentials
+*.json
+cloudflared-cert.pem
+
+# Docker-related sensitive files
+docker-compose.override.yml
+secrets/

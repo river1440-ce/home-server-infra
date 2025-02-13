@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  whoami:
+    # A container that exposes an API to show its IP address
+    image: traefik/whoami
+    container_name: whoami
+    networks:
+      - whoami_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`${WHOAMI_HOST}`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+
+networks:
+  whoami_network:
+    # Define at proxy
+    external: true

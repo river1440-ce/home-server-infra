@@ -22,6 +22,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - proxy_network
+      - whoami_network
 
 
   tunnel:
@@ -30,16 +31,10 @@ services:
     networks:
       - proxy_network
 
-  whoami:
-    # A container that exposes an API to show its IP address
-    image: traefik/whoami
-    networks:
-      - proxy_network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`${WHOAMI_HOST}`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
-
 networks:
   proxy_network:
     driver: bridge
+  whoami_network:
+    driver: bridge
+    name: whoami_network
+    # Only traefik could access
