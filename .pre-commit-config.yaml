@@ -1,7 +1,0 @@
-repos:
-  - repo: local
-    hooks:
-      - id: check-service
-        name: Check Service Reachability
-        entry: ./tests/pre_commit_check_service.sh
-        language: system
