@@ -19,3 +19,6 @@ cloudflared-cert.pem
 # Docker-related sensitive files
 docker-compose.override.yml
 secrets/
+
+# Virtual Env for Python
+venv/
