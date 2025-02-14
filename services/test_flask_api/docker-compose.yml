@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   test_flask_api:
     image: river1440ce/test_flask_api
