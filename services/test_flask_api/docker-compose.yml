@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  test_flask_api:
+    build: .
+    networks:
+      - test_flask_api_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test_flask_api.rule=Host(`${TEST_FLASK_API_HOST}`)"
+
+networks:
+  test_flask_api_network:
+    external: true

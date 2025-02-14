@@ -10,7 +10,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`${WHOAMI_HOST}`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      # - "traefik.http.routers.whoami.entrypoints=web"
 
 networks:
   whoami_network:

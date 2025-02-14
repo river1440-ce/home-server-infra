@@ -22,3 +22,7 @@ secrets/
 
 # Virtual Env for Python
 venv/
+.venv/
+
+# Python Cache
+__pycache__/
