@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   test_flask_api:
-    build: .
+    image: river1440ce/test_flask_api
+    container_name: test_flask_api
     networks:
       - test_flask_api_network
     labels:
