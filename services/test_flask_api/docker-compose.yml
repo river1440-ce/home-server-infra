@@ -11,4 +11,5 @@ services:
 
 networks:
   test_flask_api_network:
-    external: true
+    driver: bridge
+    name: test_flask_api_network
