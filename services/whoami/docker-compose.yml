@@ -7,11 +7,13 @@ services:
       - whoami_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`${WHOAMI_HOST}`)"
-      # - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.whoami.rule=Host(`${HOST_DOMAIN}`) && PathPrefix(`/${HOST_PREFIX}`)"
+      # # Define the middleware
+      - "traefik.http.middlewares.whoami-stripprefix.stripprefix.prefixes=/${HOST_PREFIX}"
+      # # Attach the middleware that strips the prefix
+      - "traefik.http.routers.whoami.middlewares=whoami-stripprefix"
 
 networks:
   whoami_network:
-    driver: bridge
-    name: whoami_network
+    external: true
     # Only traefik could access

@@ -22,7 +22,6 @@ services:
       - whoami_network
       - test_flask_api_network
 
-
   tunnel:
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run --token ${CF_TUNNEL_TOKEN}
@@ -32,8 +31,10 @@ services:
 networks:
   proxy_network:
     driver: bridge
+    name: proxy_network
   whoami_network:
-    # Define at proxy
-    external: true
+    driver: bridge
+    name: whoami_network
   test_flask_api_network:
-    external: true
+    driver: bridge
+    name: test_flask_api_network
