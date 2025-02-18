@@ -5,10 +5,15 @@ services:
     # Enables the web UI and tells Traefik to listen to docker
     command:
     #- "--log.level=DEBUG"
-      - "--api.insecure=true"
+      # - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-
+      - "--api=true"
+      - "--api.basePath=/${TRAEFIK_PREFIX}"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik-api.rule=Host(`${HOST_DOMAIN}`) && PathPrefix(`/${TRAEFIK_PREFIX}`)"
+      - "traefik.http.routers.traefik-api.service=api@internal"
     # ports:
     #   # The HTTP port
     #   - "80:80"
