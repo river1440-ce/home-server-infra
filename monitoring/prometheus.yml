@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 5s  # Adjust based on your needs
+
+scrape_configs:
+  - job_name: 'macos-node'
+    static_configs:
+      - targets: ['host.docker.internal:9100']  # MacOS Node Exporter

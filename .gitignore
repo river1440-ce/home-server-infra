@@ -26,3 +26,7 @@ venv/
 
 # Python Cache
 __pycache__/
+
+# Monitoring
+grafana_data/
+prometheus_data/
