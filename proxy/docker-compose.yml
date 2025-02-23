@@ -40,7 +40,6 @@ services:
       - proxy_network
       - whoami_network
       - test_flask_api_network
-      - default
 
   tunnel:
     image: cloudflare/cloudflared:latest
