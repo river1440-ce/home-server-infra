@@ -1,40 +1,20 @@
 services:
-  proxy-relay:
-    image: alpine/socat:latest
-    network_mode: host
-    command: TCP-LISTEN:5000,fork,bind=host.docker.internal TCP-CONNECT:127.0.0.1:5000
-    extra_hosts:
-      - host.docker.internal:host-gateway
-
   reverse-proxy:
     # The official v3 Traefik docker image
     image: traefik:v3.3
     # Enables the web UI and tells Traefik to listen to docker
     command:
     #- "--log.level=DEBUG"
-      # - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--providers.file.filename=/config/traefik-config.yml"
-      - "--providers.file.watch=true"
       - "--api=true"
       - "--api.basePath=/${TRAEFIK_PREFIX}"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik-api.rule=Host(`${HOST_DOMAIN}`) && PathPrefix(`/${TRAEFIK_PREFIX}`)"
       - "traefik.http.routers.traefik-api.service=api@internal"
-    environment:
-      - CHECKMK_SERVER_DOMAIN=${CHECKMK_SERVER_DOMAIN}
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    # ports:
-    #   # The HTTP port
-    #   - "80:80"
-    #   # The Web UI (enabled by --api.insecure=true)
-    #   - "8080:8080"
     volumes:
       # So that Traefik can listen to the Docker events
-      - ./dev/traefik-config.yml:/config/traefik-config.yml
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - proxy_network
