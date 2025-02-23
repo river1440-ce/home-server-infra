@@ -14,6 +14,15 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik-api.rule=Host(`${HOST_DOMAIN}`) && PathPrefix(`/${TRAEFIK_PREFIX}`)"
       - "traefik.http.routers.traefik-api.service=api@internal"
+      # Define Check-mk
+      - "traefik.http.routers.checkmk-server-route.rule=Host(`${HOST_DOMAIN}`) && PathPrefix(`/${CHECKMK_SERVER_PREFIX}`)"
+      # Define the middleware
+      - "traefik.http.middlewares.checkmk-server-stripprefix.stripprefix.prefixes=/${CHECKMK_SERVER_PREFIX}"
+      # Attach the middleware that strips the prefix
+      - "traefik.http.routers.checkmk-server-route.middlewares=checkmk-server-stripprefix"
+      - "traefik.http.routers.checkmk-server-route.service=checkmk-server-service"
+      - "traefik.http.services.checkmk-server-service.loadbalancer.server.port=5000"
+
     # ports:
     #   # The HTTP port
     #   - "80:80"
