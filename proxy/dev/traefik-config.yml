@@ -1,0 +1,11 @@
+http:
+  routers:
+    checkmk-server-route:
+      service: checkmk-server-service
+      rule: "Host(`{{env "CHECKMK_SERVER_DOMAIN"}}`)"
+
+  services:
+    checkmk-server-service:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:5000/"
