@@ -1,4 +1,11 @@
 services:
+  proxy-relay:
+    image: alpine/socat:latest
+    network_mode: host
+    command: TCP-LISTEN:5000,fork,bind=host.docker.internal TCP-CONNECT:127.0.0.1:5000
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
   reverse-proxy:
     # The official v3 Traefik docker image
     image: traefik:v3.3
